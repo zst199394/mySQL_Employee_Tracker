@@ -77,19 +77,11 @@ const runSearch = () => {
       }
     });
 };
+
 const empSearch = () => {
   console.log('√√√√√ View all employees...√√√√√√\n');
-  // connection.query("SELECT * FROM employees", (err, res) => {
-  //   console.log(res);
-  //   if (err) throw err;
-  //   console.table(res);
-  //   runSearch();
-  // })
-  let query =
-        'SELECT employees.id, employees.first_name, employees.last_name,roles.title,roles.salary,manager_id';
-      query +=
-        'FROM employees INNER JOIN roles ON (employees.role_id = roles.id)'
-      // query +=
+  let query = `SELECT employees.id, employees.first_name, employees.last_name, roles.title, roles.salary, employees.manager_id
+FROM employees INNER JOIN roles ON (employees.role_id = roles.id)`
       //   'FROM employees INNER JOIN departments ON (roles.department_id = departments.id)';
       connection.query(query, (err, res) => {
         if (err) throw err;
