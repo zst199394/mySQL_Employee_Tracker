@@ -83,7 +83,7 @@ const empSearch = () => {
     console.log(res);
     if (err) throw err;
     console.table(res);
-    runSearch;
+    runSearch();
   })
   // let query =
   //       'SELECT employees.id, employees.first_name, employees.last_name,roles.title,departments.name,roles.salary';
@@ -109,7 +109,7 @@ const depSearch = () => {
     console.log(res);
     if (err) throw err;
     console.table(res);
-    runSearch;
+    runSearch();
   })
 };
 
@@ -119,7 +119,7 @@ const roleSearch = () => {
     console.log(res);
     if (err) throw err;
     console.table(res);
-    runSearch;
+    runSearch();
   })
 };
 
@@ -156,7 +156,7 @@ const empAdd = () => {
         },
         (err) => {
           if (err) throw err;
-          console.log("You have added a new employee √√√√√√√");
+          console.log("√√√√√√You have added a new employee +1 √√√√√√√");
           runSearch();
         });
     });
@@ -177,7 +177,6 @@ const empRemove = () => {
      });
     });
 };
-
 
 // const empUpdate = () => {};
 // const roleUpdate = () => {};
