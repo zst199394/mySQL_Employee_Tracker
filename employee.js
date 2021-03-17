@@ -150,6 +150,7 @@ const empAdd = () => {
         (err) => {
           if (err) throw err;
           console.log("√√√√√√____You have added a new employee +1 _____√√√√√√√");
+          console.table(res);
           runSearch();
         });
     });
@@ -192,7 +193,7 @@ const empUpdate = () => {
     .then((res) => {
        let query =`UPDATE employees
          SET role_id = ${roleID}, manager_id = ${managerID}
-         WHERE ID = ${res.eID};`
+         WHERE ID = ${eID};`
          connection.query(query, (err, res) => {
           if (err) throw err;
           console.log("√√√√√√____You have updated an employee  _____√√√√√√√");
