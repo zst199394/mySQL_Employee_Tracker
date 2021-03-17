@@ -165,13 +165,40 @@ const empRemove = () => {
     .then((res) => {
     connection.query(`DELETE FROM employees WHERE id=${empID}`, (err, res) => {
       if (err) throw err;
-      
       console.table(res);
       runSearch();
      });
     });
 };
 
-// const empUpdate = () => {};
-// const roleUpdate = () => {};
+const empUpdate = () => {
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'eID',
+      message: "What is the employee's id?"
+    },
+    {
+      type: 'input',
+      name: 'roleID',
+      message: "What is the employee's role ID?"
+    },
+    {
+      type: 'input',
+      name: 'managerID',
+      message: "What is the manager's ID?"
+    }
+  ])
+    .then((res) => {
+       let query =`UPDATE employees
+         SET role_id = ${roleID}, manager_id = ${managerID}
+         WHERE ID = ${res.eID};`
+         connection.query(query, (err, res) => {
+          if (err) throw err;
+          console.log("√√√√√√____You have updated an employee  _____√√√√√√√");
+          console.table(res);
+          runSearch();
+        });
+    });         
+};
 // const depUpdate = () => {};
