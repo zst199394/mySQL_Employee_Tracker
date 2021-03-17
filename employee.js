@@ -79,10 +79,10 @@ const runSearch = () => {
 };
 
 const empSearch = () => {
-  console.log('√√√√√ View all employees...√√√√√√\n');
-  let query = `SELECT employees.id, employees.first_name, employees.last_name, roles.title, roles.salary, employees.manager_id
-FROM employees INNER JOIN roles ON (employees.role_id = roles.id)`
-      //   'FROM employees INNER JOIN departments ON (roles.department_id = departments.id)';
+  console.log('√√√√√_________ View all employees________√√√√√√\n');
+  let query = `SELECT employees.id, employees.first_name, employees.last_name, roles.title, departments.department_name, roles.salary, employees.manager_id
+  FROM employees INNER JOIN roles ON employees.role_id = roles.id
+  INNER JOIN departments ON roles.department_id = departments.id`
       connection.query(query, (err, res) => {
         if (err) throw err;
         console.table(res);
@@ -91,22 +91,28 @@ FROM employees INNER JOIN roles ON (employees.role_id = roles.id)`
 };
 
 const depSearch = () => {
-  console.log('√√√√√ View all departments...√√√√√√\n');
-  connection.query("SELECT * FROM departments", (err, res) => {
-    console.log(res);
-    if (err) throw err;
-    console.table(res);
-    runSearch();
+  console.log('√√√√√ ___________View all departments_________√√√√√√\n');
+  let query = `SELECT employees.id, employees.first_name, employees.last_name, roles.title, departments.department_name, roles.salary, employees.manager_id
+  FROM employees INNER JOIN roles ON employees.role_id = roles.id
+  INNER JOIN departments ON roles.department_id = departments.id
+  ORDER BY departments.department_name ASC;`
+      connection.query(query, (err, res) => {
+        if (err) throw err;
+        console.table(res);
+        runSearch();
   })
 };
 
 const roleSearch = () => {
-  console.log('√√√√√ View all roles...√√√√√√\n');
-  connection.query("SELECT * FROM roles", (err, res) => {
-    console.log(res);
-    if (err) throw err;
-    console.table(res);
-    runSearch();
+  console.log('√√√√√________View all roles____________√√√√√√\n');
+  let query = `SELECT employees.id, employees.first_name, employees.last_name, roles.title, departments.department_name, roles.salary, employees.manager_id
+  FROM employees INNER JOIN roles ON employees.role_id = roles.id
+  INNER JOIN departments ON roles.department_id = departments.id
+  ORDER BY roles.title ASC;`
+      connection.query(query, (err, res) => {
+        if (err) throw err;
+        console.table(res);
+        runSearch();
   })
 };
 
@@ -143,7 +149,7 @@ const empAdd = () => {
         },
         (err) => {
           if (err) throw err;
-          console.log("√√√√√√You have added a new employee +1 √√√√√√√");
+          console.log("√√√√√√____You have added a new employee +1 _____√√√√√√√");
           runSearch();
         });
     });
@@ -157,7 +163,7 @@ const empRemove = () => {
       message: 'Which employee do u want to remove?(by id)',
     })
     .then((res) => {
-    connection.query(`DELETE FROM employee WHERE id=${empID}`, (err, res) => {
+    connection.query(`DELETE FROM employees WHERE id=${empID}`, (err, res) => {
       if (err) throw err;
       
       console.table(res);
