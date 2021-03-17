@@ -164,7 +164,7 @@ const empRemove = () => {
       message: 'Which employee do u want to remove?(by id)',
     })
     .then((res) => {
-    connection.query(`DELETE FROM employees WHERE id=${empID}`, (err, res) => {
+    connection.query(`DELETE FROM employees WHERE id= ${res.empID}`, (err, res) => {
       if (err) throw err;
       console.table(res);
       runSearch();
@@ -192,8 +192,8 @@ const empUpdate = () => {
   ])
     .then((res) => {
        let query =`UPDATE employees
-         SET role_id = ${roleID}, manager_id = ${managerID}
-         WHERE ID = ${eID};`
+         SET role_id = ${res.roleID}, manager_id = ${res.managerID}
+         WHERE ID = ${res.eID};`
          connection.query(query, (err, res) => {
           if (err) throw err;
           console.log("√√√√√√____You have updated an employee  _____√√√√√√√");
