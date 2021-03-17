@@ -79,28 +79,23 @@ const runSearch = () => {
 };
 const empSearch = () => {
   console.log('√√√√√ View all employees...√√√√√√\n');
-  connection.query("SELECT * FROM employees", (err, res) => {
-    console.log(res);
-    if (err) throw err;
-    console.table(res);
-    runSearch();
-  })
-  // let query =
-  //       'SELECT employees.id, employees.first_name, employees.last_name,roles.title,departments.name,roles.salary';
-  //     query +=
-  //       'FROM employees INNER JOIN roles ON (employees.role_id = roles.id)'
-  //     query +=
-  //       'INNER JOIN departments ON (roles.department_id = departments.id)';
-  //     connection.query(query, (err, res) => {
-  //       console.log(`${res.length} matches found!`);
-  //       res.forEach((['id', 'first_name', 'last_name', 'title', 'department', 'salary','manager'], i) => {
-  //         const num = i + 1;
-  //         console.table(['id', 'first_name', 'last_name', 'title', 'department', 'salary','manager'], values);
-  //         console.log(
-  //           `${num} Year: ${year} Position: ${position} || Artist: ${artist} || Song: ${song} || Album: ${album}`
-            
-  //       );
-  // });
+  // connection.query("SELECT * FROM employees", (err, res) => {
+  //   console.log(res);
+  //   if (err) throw err;
+  //   console.table(res);
+  //   runSearch();
+  // })
+  let query =
+        'SELECT employees.id, employees.first_name, employees.last_name,roles.title,roles.salary,manager_id';
+      query +=
+        'FROM employees INNER JOIN roles ON (employees.role_id = roles.id)'
+      // query +=
+      //   'FROM employees INNER JOIN departments ON (roles.department_id = departments.id)';
+      connection.query(query, (err, res) => {
+        if (err) throw err;
+        console.table(res);
+        runSearch();
+  });
 };
 
 const depSearch = () => {
